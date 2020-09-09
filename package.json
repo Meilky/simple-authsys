@@ -1,0 +1,32 @@
+{
+	"name": "simple-authsys",
+	"version": "1.0.0",
+	"description": "A simple authentification system",
+	"main": "./lib/index.js",
+	"types": "./lib",
+	"scripts": {
+		"build": "tsc --project ./"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Meilky/authSys.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Meilky/authSys/issues"
+	},
+	"homepage": "https://github.com/Meilky/authSys#readme",
+	"devDependencies": {
+		"@types/express": "^4.17.8",
+		"@types/mysql": "^2.15.15",
+		"@types/node": "^14.6.4",
+		"ts-node": "^9.0.0",
+		"typescript": "^4.0.2"
+	},
+	"dependencies": {
+		"custom-env": "^2.0.1",
+		"express": "^4.17.1",
+		"mysql": "^2.18.1"
+	}
+}
