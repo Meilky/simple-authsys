@@ -1,9 +1,6 @@
 name: simple-authsys actions
 
 on:
-  pull_request:
-    branches: 
-      - master
   push:
     branches: 
       - dev
