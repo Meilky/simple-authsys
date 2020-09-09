@@ -1,12 +1,12 @@
 name: simple-authsys actions
 
 on:
-  push:
+  pull_request:
     branches: 
       - master
+  push:
+    branches: 
       - dev
-  pull_request:
-
 jobs:
   build:
     name: Running build process
