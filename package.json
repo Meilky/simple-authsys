@@ -9,14 +9,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Meilky/authSys.git"
+		"url": "git+https://github.com/Meilky/simple-authsys.git"
 	},
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/Meilky/authSys/issues"
+		"url": "https://github.com/Meilky/simple-authsys/issues"
 	},
-	"homepage": "https://github.com/Meilky/authSys#readme",
+	"homepage": "https://github.com/Meilky/simple-authsys#readme",
 	"devDependencies": {
 		"@types/express": "^4.17.8",
 		"@types/mysql": "^2.15.15",
@@ -28,5 +28,8 @@
 		"custom-env": "^2.0.1",
 		"express": "^4.17.1",
 		"mysql": "^2.18.1"
+	},
+	"directories": {
+		"lib": "lib"
 	}
 }
