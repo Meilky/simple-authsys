@@ -5,8 +5,8 @@ on:
     branches: 
       - dev
 jobs:
-  build:
-    name: Running build process
+  testbuild:
+    name: Running build and test process
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,11 +27,5 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Push
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: self
-        BRANCH: build # The directory where your assets are generated
-        FOLDER: /lib
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-        MESSAGE: "Build: ({sha}) {msg}" # The commit message
+    - name: Test
+      run: npm test
