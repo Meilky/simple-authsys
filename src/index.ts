@@ -1,12 +1,11 @@
-class AuthSys {
-	n: string = "";
-	setup(name: string): void {
-		this.n = name;
-	}
-
-	getName(): string {
-		return this.n;
-	}
+interface MainOptions {
+	name: string;
 }
 
-export { AuthSys };
+const authsys = (options: MainOptions): string => {
+	return "Hello " + options.name;
+};
+
+const setup = (): void => {};
+
+export { authsys, setup };

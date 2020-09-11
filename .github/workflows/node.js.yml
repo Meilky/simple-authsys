@@ -5,28 +5,27 @@ on:
     branches: 
       - dev
 jobs:
-  build:
-    name: Running build process
+  testbuild:
+    name: Running build and test process
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Git checkout
+      uses: actions/checkout@v2
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
     - name: Install
       run: npm install
+
     - name: Build
       run: npm run build
-    - name: Push
-      uses: s0/git-publish-subdir-action@develop
-      env:
-        REPO: self
-        BRANCH: build # The directory where your assets are generated
-        FOLDER: build # The branch name where you want to push the assets
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-        MESSAGE: "Build: ({sha}) {msg}" # The commit message
+
+    - name: Test
+      run: npm test
