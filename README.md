@@ -1,1 +1,1 @@
-# authSys
+# simple-authsys
