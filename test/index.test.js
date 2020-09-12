@@ -7,7 +7,7 @@ test("Run without the setup sequence", () => {
 		expect(error).toBeInstanceOf(Error);
 		expect(error).toHaveProperty(
 			"message",
-			"The process.env.TokenKey isn't supose to be null, got to https://github.com/Meilky/simple-authsys/blob/master/README.md to resolve this error",
+			"You can't use the authentification if you doesn't run the setup sequence, go to https://github.com/Meilky/simple-authsys/blob/master/README.md to resolve your error.",
 		);
 	}
 });
