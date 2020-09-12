@@ -1,5 +1,10 @@
-const { authsys } = require("../lib");
+const authsys = require("../lib");
 
-test("return the good string", () => {
-	expect(authsys({ name: "joe" })).toBe("Hello joe");
+test("Run without the setup sequence", () => {
+	try {
+		authsys.auth();
+	} catch (error) {
+		expect(error).toBeInstanceOf(Error);
+		expect(error).toHaveProperty("message", "Something bad happened!");
+	}
 });
