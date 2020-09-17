@@ -1,30 +1,14 @@
-import jwt, { Secret } from "jsonwebtoken";
-
-interface AuthTokenConstructor {
-	new (options: AuthTokenOptions): AuthTokenInterface;
-}
-
-interface AuthTokenInterface {
-	tok: string;
-	data: object | null;
-	error: object | null;
-
-	authenticate(): Promise<object>;
-
-	getData(): object | null;
-
-	getError(): object | null;
-}
-
-interface AuthTokenOptions {
-	token: string;
-	type: string;
-}
+import jwt from "jsonwebtoken";
+import {
+	AuthTokenConstructor,
+	AuthTokenInterface,
+	AuthTokenOptions,
+} from "./intefaces/authToken.interfaces";
 
 const AuthToken: AuthTokenConstructor = class AuthToken implements AuthTokenInterface {
-	tok: string;
-	data: object | null;
-	error: object | null;
+	private tok: string;
+	private data: object | null;
+	private error: object | null;
 
 	constructor(options: AuthTokenOptions) {
 		this.tok = options.token;
@@ -44,10 +28,22 @@ const AuthToken: AuthTokenConstructor = class AuthToken implements AuthTokenInte
 				);
 			}
 
+			this.verifyToken(key)
+				.then((data) => {
+					return resolve(data);
+				})
+				.catch((err) => {
+					return rejects(err);
+				});
+		});
+	}
+
+	private verifyToken(key: string): Promise<object> {
+		return new Promise((resolve, rejects) => {
 			jwt.verify(this.tok, key.toString(), { algorithms: ["RS256"] }, (err, decoded) => {
 				if (err) {
 					this.error = err;
-					return rejects(new Error(err.message));
+					return rejects(err);
 				} else {
 					if (typeof decoded === "undefined") {
 						return rejects(new Error("No data found in the token"));
