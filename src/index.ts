@@ -1,7 +1,5 @@
 import { NextFunction, Response, Request } from "express";
-import { SetupOptions } from "./intefaces/index.interfaces";
-import { AuthToken } from "./authToken";
-import { AuthTokenOptions } from "./intefaces/authToken.interfaces";
+import { SetupOptions } from "./Intefaces/index.interfaces";
 
 let opt: SetupOptions;
 
@@ -20,19 +18,8 @@ const auth = (req: Request, res: Response, next: NextFunction): void => {
 		throw err;
 	} else {
 		const accessToken = req.body.accessToken;
-
 		if (typeof accessToken === "string") {
-			const options: AuthTokenOptions = { token: accessToken, type: "accessToken" };
-			const authentification = new AuthToken(options);
-			authentification
-				.authenticate()
-				.then((data) => {
-					req.body.authTokenData = data;
-					next();
-				})
-				.catch((err) => {
-					res.status(403).json({ authentification: { error: err } });
-				});
+			//Setup
 		} else {
 			res.status(403).json({
 				authentification: {
