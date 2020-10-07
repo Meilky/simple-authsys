@@ -1,6 +1,12 @@
-interface SetupOptions {
-	dbusername: string;
-	dbpassword: string;
+export interface SetupOptions {
+	storageType: string;
+	accessTokenKey: string;
+	refreshTokenKey: string;
 }
 
-export { SetupOptions };
+interface SQLType {
+	username: string;
+	password: string;
+	db: string;
+	host: string;
+}
