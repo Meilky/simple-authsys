@@ -5,8 +5,8 @@
 	"main": "./lib/index.js",
 	"types": "./lib",
 	"scripts": {
-		"build": "tsc --project ./",
-		"test": "npm run build && jest"
+		"build": "rm -r lib && tsc --project ./tsconfig.json",
+		"start": "npm run build && node ./test/server.js"
 	},
 	"repository": {
 		"type": "git",

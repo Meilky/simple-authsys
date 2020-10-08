@@ -26,7 +26,7 @@ const User: UserConstructor = class User implements UserInterface {
 	protected data: object | null;
 
 	constructor(options: UserOptions) {
-		this.opts = { ...options, ...UserOptionsDefault };
+		this.opts = { ...UserOptionsDefault, ...options };
 		this.error = null;
 		this.data = null;
 	}
