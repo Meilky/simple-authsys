@@ -19,11 +19,11 @@ export const auth = (req: Request, res: Response, next: NextFunction): void => {
 	if (!setupSequenceExecuted) {
 		console.error("You can't authenticate if the setup sequence as not been executed.");
 		err = "You can't authenticate if the setup sequence as not been executed.";
-	} else if (!req.body.username) {
+	} else if (!username) {
 		err = "You need to specify a username.";
-	} else if (!req.body.email) {
+	} else if (!email) {
 		err = "You need to specify a email.";
-	} else if (!req.body.password) {
+	} else if (!password) {
 		err = "You need to specify a email.";
 	}
 
