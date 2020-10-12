@@ -13,13 +13,13 @@ export const Query: CQuery = class Query implements IQuery {
 	private result: any;
 	private fields: MySQL.FieldInfo[] | null;
 
-	constructor(private options: OQuery) {
-		this.con = MySQL.createConnection(this.options);
+	constructor(options: OQuery) {
+		this.con = MySQL.createConnection(options);
 		this.err = null;
 		this.fields = null;
 	}
 
-	executeQuery(options: OexecuteQuery): Promise<MySQL.MysqlError | IexecuteQueryData> {
+	executeQuery(options: OexecuteQuery): Promise<IexecuteQueryData> {
 		return new Promise((resolve, reject) => {
 			this.con.connect((err) => {
 				if (err) {

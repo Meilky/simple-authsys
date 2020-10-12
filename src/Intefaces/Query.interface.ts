@@ -1,11 +1,11 @@
-import MySQL, { MysqlError } from "mysql";
+import MySQL from "mysql";
 
 export interface CQuery {
 	new (options: OQuery): IQuery;
 }
 
 export interface IQuery {
-	executeQuery(options: OexecuteQuery): Promise<MySQL.MysqlError | IexecuteQueryData>;
+	executeQuery(options: OexecuteQuery): Promise<IexecuteQueryData>;
 	destroyCon(): void;
 	getFields(): MySQL.FieldInfo[] | null;
 	getErr(): MySQL.MysqlError | null;
@@ -21,7 +21,7 @@ export interface OQuery {
 
 export interface OexecuteQuery {
 	query: string;
-	data: string[];
+	data: Array<string | number | null>;
 }
 
 export interface IexecuteQueryData {

@@ -1,16 +1,19 @@
+import { OQuery } from "./Query.interface";
+
 export interface CUser {
 	new (options: OUser): IUser;
 }
 
 export interface IUser {
-	loadUser(): Promise<IUserData>;
-	getOptions(): IUserData;
+	loadUser(options: OQuery): Promise<OUser>;
+	getOptions(): OUser;
 	setOptions(options: OUser): boolean;
 }
 
 export interface OUser<T = string> {
+	id?: number | null;
 	username?: string | null;
-	email: T;
+	email?: string | null;
 	password: T;
 	firstName?: string | null;
 	lastName?: string | null;
@@ -18,11 +21,7 @@ export interface OUser<T = string> {
 	creationDate?: Date | null;
 }
 
-export interface IUserData<T = string> extends OUser<T> {
-	id?: number | null;
-}
-
-export const DUser: IUserData<null> = {
+export const DUser: OUser<null> = {
 	id: null,
 	username: null,
 	email: null,
