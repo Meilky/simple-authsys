@@ -4,19 +4,21 @@ import { Query } from "./Query.class";
 
 export const User: CUser = class User implements IUser {
 	private options: OUser;
+	private data: Array<OUser<null | string>>;
 
 	constructor(options: OUser) {
 		this.options = { ...DUser, ...options };
+		this.data = [DUser];
 	}
 
-	loadUser(options: OQuery): Promise<OUser> {
+	loadUser(connectionOptions: OQuery): Promise<OUser> {
 		return new Promise((resolve, reject) => {
-			const q = new Query(options);
+			const q = new Query(connectionOptions);
 			let qOptions: OexecuteQuery = { query: "", data: [] };
 
 			if (this.options.id) {
 				qOptions.query = "SELECT * FROM TUser WHERE id=?;";
-				qOptions.data = [Number.parseInt(this.options.id)];
+				qOptions.data = [Number(this.options.id)];
 			} else if (this.options.email) {
 				qOptions.query = "SELECT * FROM TUser WHERE email=?;";
 				qOptions.data = [this.options.email.toString()];
@@ -30,10 +32,10 @@ export const User: CUser = class User implements IUser {
 			}
 
 			q.executeQuery(qOptions)
-				.then((data) => {
-					this.options = data.result[0];
+				.then(({ result }) => {
+					this.data = result;
 				})
-				.reject((err) => {
+				.catch((err) => {
 					return reject(err);
 				});
 		});
@@ -46,5 +48,18 @@ export const User: CUser = class User implements IUser {
 	setOptions(options: OUser): boolean {
 		this.options = { ...this.options, ...options };
 		return true;
+	}
+
+	getData(): Array<OUser<null | string>> {
+		return this.data;
+	}
+
+	updateUser(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			if (this.data[0] === DUser) {
+				return new Error("You need to load a user before updating it.");
+			}
+			return resolve(true);
+		});
 	}
 };

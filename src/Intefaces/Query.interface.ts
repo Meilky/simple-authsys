@@ -21,7 +21,7 @@ export interface OQuery {
 
 export interface OexecuteQuery {
 	query: string;
-	data: Array<string | number | null>;
+	data: (string | number | null)[];
 }
 
 export interface IexecuteQueryData {
